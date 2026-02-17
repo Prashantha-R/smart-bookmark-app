@@ -1,36 +1,74 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Smart Bookmark App
 
-## Getting Started
+This project is a simple bookmark manager built using Next.js, Supabase, Google OAuth authentication and Tailwind CSS. Users can log in using Google, add bookmarks, delete bookmarks and manage their own private bookmark list securely. The project demonstrates authentication, database integration, real time updates and deployment using modern web technologies.
 
-First, run the development server:
+Live Project Link
+https://smart-bookmark-app-lyart-nu.vercel.app/
 
-```bash
+GitHub Repository
+https://github.com/Prashantha-R/smart-bookmark-app
+
+Features
+
+Google login using Supabase authentication
+Add bookmarks with title and URL
+Delete bookmarks anytime
+Private bookmarks for each user using Row Level Security
+Real time bookmark updates without page refresh
+Responsive UI using Tailwind CSS
+Deployed on Vercel cloud platform
+
+Tech Stack
+
+Frontend Next.js React Tailwind CSS
+Backend Supabase Authentication Database Realtime
+Deployment Vercel
+
+Setup Instructions
+
+1 Clone repository
+git clone https://github.com/Prashantha-R/smart-bookmark-app.git
+
+cd smart-bookmark-app
+
+2 Install dependencies
+npm install
+
+3 Create environment file .env.local and add
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_anon_key
+
+4 Run project locally
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Problems Faced And Solutions
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1.Google OAuth redirect issue
+After login the app redirected back to login page.
+Solution was adding correct Supabase callback URL in Supabase Authentication settings and Google Cloud Console.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+2.Supabase Row Level Security configuration
+Initially bookmarks were not saved or accessible correctly.
+Enabled Row Level Security on bookmarks table and added policy auth.uid() = user_id so each user can access only their own data.
 
-## Learn More
+3.Tailwind CSS styling issue
+Styles were not applied initially.
+Imported Tailwind properly in globals.css using @import "tailwindcss" and restarted the development server.
 
-To learn more about Next.js, take a look at the following resources:
+4.Deployment TypeScript errors on Vercel
+Build failed due to possible null user authentication error.
+Added proper null checks before accessing user data and defined correct TypeScript state types.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+5.Environment variables missing after deployment
+Supabase connection failed in production.
+Added NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY in Vercel environment variables.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Conclusion
 
-## Deploy on Vercel
+This project helped me learn authentication integration, secure database handling using Supabase, real time data updates, responsive UI development with Tailwind CSS, and deployment workflow using Vercel. It also improved debugging and problem solving skills during production deployment.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Author
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Prashantha R
+MCA Graduate
+Full Stack Developer Fresher
