@@ -15,7 +15,7 @@ export default function Dashboard() {
   const fetchBookmarks = async () => {
     const { data: userData } = await supabase.auth.getUser();
 
-    if(!userData?.user) return;
+    if(!userData?.user?.id) return;
     const { data } = await supabase
       .from("bookmarks")
       .select("*")
