@@ -35,8 +35,8 @@ cd smart-bookmark-app
 npm install
 
 3 Create environment file .env.local and add
-NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_anon_key
+NEXT_PUBLIC_SUPABASE_URL=https://gmlywcbwlnhttviticco.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=sb_publishable_Jmeqt-bJ8Gyz_FYparN_RA_XSzE4MLU
 
 4 Run project locally
 npm run dev
