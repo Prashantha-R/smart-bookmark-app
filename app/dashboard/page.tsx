@@ -3,10 +3,17 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabaseClient";
 
+type Bookmark = {
+  id: string;
+  title: string;
+  url: string;
+  user_id: string;
+};
+
 export default function Dashboard() {
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
-  const [bookmarks, setBookmarks] = useState([]);
+  const [bookmarks, setBookmarks] = useState<Bookmark[]>([]);
 
   useEffect(() => {
     fetchBookmarks();
@@ -15,7 +22,8 @@ export default function Dashboard() {
   const fetchBookmarks = async () => {
     const { data: userData } = await supabase.auth.getUser();
 
-    if(!userData?.user?.id) return;
+    if (!userData?.user?.id) return;
+
     const { data } = await supabase
       .from("bookmarks")
       .select("*")
@@ -26,6 +34,8 @@ export default function Dashboard() {
 
   const addBookmark = async () => {
     const { data: userData } = await supabase.auth.getUser();
+
+    if (!userData?.user?.id) return;
 
     await supabase.from("bookmarks").insert({
       title,
@@ -38,7 +48,7 @@ export default function Dashboard() {
     fetchBookmarks();
   };
 
-  const deleteBookmark = async (id) => {
+  const deleteBookmark = async (id: string) => {
     await supabase.from("bookmarks").delete().eq("id", id);
     fetchBookmarks();
   };
@@ -91,7 +101,11 @@ export default function Dashboard() {
             key={b.id}
             className="flex justify-between border p-3 mb-2 rounded"
           >
-            <a href={b.url} target="_blank" className="text-blue-600 underline">
+            <a
+              href={b.url}
+              target="_blank"
+              className="text-blue-600 underline"
+            >
               {b.title}
             </a>
 
@@ -107,6 +121,5 @@ export default function Dashboard() {
     </div>
   );
 }
-
 
 
